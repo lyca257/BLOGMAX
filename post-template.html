@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章 - Lee的个人博客</title>
+    <link rel="stylesheet" href="../indexhouduan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <!-- 添加 Markdown 解析器 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lee的个人空间</h1>
+            <p class="subtitle">分享技术，记录生活</p>
+        </header>
+        
+        <main id="content" class="markdown-body">
+            <!-- Markdown 内容将被动态加载到这里 -->
+        </main>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://twitter.com/ttajiayouchina" target="_blank">Twitter</a> |
+                <a href="https://github.com/lyca257" target="_blank">GitHub</a>
+            </div>
+            <p>&copy; 2024 Lee的个人博客 | All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // 获取当前文章的路径
+        const postPath = new URLSearchParams(window.location.search).get('post');
+        
+        // 加载并渲染 Markdown 文件
+        fetch(postPath)
+            .then(response => response.text())
+            .then(markdown => {
+                document.getElementById('content').innerHTML = marked.parse(markdown);
+                // 从 Markdown 内容中提取标题
+                const title = document.querySelector('h1').textContent;
+                document.title = `${title} - Lee的个人博客`;
+            });
+    </script>
+</body>
+</html> 
